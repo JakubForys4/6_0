@@ -55,9 +55,15 @@ class Main {
         System.out.println("0 - aby wyjść z programu");
         while (true) {
             try {
-                return scan.nextInt();
+                int choice = scan.nextInt();
+                if (choice < 0 || choice > 3) {
+                    System.out.println("Błąd! Podaj liczbę w zakresie 0-3.");
+                } else {
+                    return choice;
+                }
+
             } catch (InputMismatchException e) {
-                System.out.println("Błędny wybór! Proszę podać liczbę.");
+                System.out.println("Błąd");
                 scan.nextLine();
             }
         }
