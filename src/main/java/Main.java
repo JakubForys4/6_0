@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class WrongStudentName extends Exception { }
+class WrongAge extends Exception { }
 
 class Main {
     public static Scanner scan = new Scanner(System.in);
@@ -31,9 +32,13 @@ class Main {
                     default: return;
                 }
             } catch(IOException e) {
+                System.out.println("Wystąpił błąd wejścia/wyjścia.");
+
 
             } catch(WrongStudentName e) {
                 System.out.println("Błędne imię studenta!");
+            } catch(WrongAge e) {
+                System.out.println("Niepoprawny wiek! Wiek musi być z zakresu 1-99.");
             }
         }
     }
@@ -57,10 +62,12 @@ class Main {
         return name;
     }
 
-    public static void exercise1() throws IOException, WrongStudentName {
+    public static void exercise1() throws IOException, WrongStudentName, WrongAge {
         var name = ReadName();
         System.out.println("Podaj wiek: ");
         var age = scan.nextInt();
+        if (age < 1 || age > 99)
+            throw new WrongAge();
         scan.nextLine();
         System.out.println("Podaj datę urodzenia DD-MM-YYYY");
         var date = scan.nextLine();
